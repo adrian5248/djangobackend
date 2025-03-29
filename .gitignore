@@ -1,0 +1,20 @@
+# Ignorar entornos virtuales
+venv/
+
+# Archivos de caché y bytecode de Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Archivos de entorno y logs
+.env
+*.log
+
+# Archivos de compilación
+/build/
+/dist/
+/*.egg-info
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
