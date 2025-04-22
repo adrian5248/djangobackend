@@ -30,26 +30,28 @@ SIMPLE_JWT = {
     "ROTATE_REFRESH_TOKEN": False,
     "BLACKLIST_AFTER_ROTATION": False,
     "UPDATE_LAST_LOGIN": True,
-    "SINGING_KEY": "acomplexkey",
-    "ALOGRIGTHM": "HS512"
+    "SIGNING_KEY": "acomplexkey",
+    "ALGORITHM": "HS512"
+
 
 }
 
-ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+ACCOUNT_USER_MODEL_USERNAME_FIELD = "username"
 ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_USERNAME_REQUIRED = True
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
-ACCOUNT_EMAIL_VERIFICATION = None
+ACCOUNT_EMAIL_VERIFICATION = "optional"
+
 
 REST_FRAMEWORK = {
-    'DEFAULT AUTHENTICATION_CLASSES': (
+    'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
-    
-    'DEFAULT AUTHENTICATION_CLASSES': (
-        'rest_framework_.permissions.IsAuthenticated',
-    )
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
 }
+
 
 CORS_ALLOWED_ORIGINS = [
     'https://127.0.0.1:8000',
@@ -73,22 +75,22 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-
     'rest_framework',
     'rest_framework.authtoken',
-    'rest_framework.simplejwt',
+    
 
     'allauth',
     'allauth.account',
 
     'dj_rest_auth',
-    'dj_rest_auth.resgistration',
+    'dj_rest_auth.registration',
 
-    'corsheaders'
+    'corsheaders',
 
     'property',
     'useraccount',
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -97,9 +99,13 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+
+    'allauth.account.middleware.AccountMiddleware',
+
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
 
 ROOT_URLCONF = 'djangobnb_backend.urls'
 
@@ -172,6 +178,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
